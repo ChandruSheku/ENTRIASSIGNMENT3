@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+        <!-- Login Form -->
+<form id="loginForm">
+  <input type="text" id="username" placeholder="Username" required>
+  <input type="email" id="email" placeholder="Email" required>
+  <button type="submit">Login</button>
+</form>
+
+<!-- Signup Form -->
+<form id="signupForm">
+  <input type="text" id="name" placeholder="Name" required>
+  <input type="email" id="email" placeholder="Email" required>
+  <input type="password" id="password" placeholder="Password" required>
+  <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+  <button type="submit">Signup</button>
+</form>
+
+<script>
+  // Login Form Validation
+  const loginForm = document.getElementById('loginForm');
+  loginForm.addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const username = document.getElementById('username').value;
+    const email = document.getElementById('email').value;
+
+    if (username.trim() === '') {
+      alert('Username should not be empty');
+      return;
+    }
+
+    if (!validateEmail(email)) {
+      alert('Please enter a valid email address');
+      return;
+    }
+
+    // Perform login logic here
+  });
+
+  // Signup Form Validation
+  const signupForm = document.getElementById('signupForm');
+  signupForm.addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const confirmPassword = document.getElementById('confirmPassword').value;
+
+    if (name.trim() === '') {
+      alert('Name should not be empty');
+      return;
+    }
+
+    if (!validateEmail(email)) {
+      alert('Please enter a valid email address');
+      return;
+    }
+
+    if (!validatePassword(password)) {
+      alert('Password should be at least 8 characters long, with at least 1 uppercase, 1 lowercase, and 1 special character');
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      alert('Confirm Password should match the Password field');
+      return;
+    }
+
+    // Perform signup logic here
+  });
+
+  // Email Validation Function
+  function validateEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  }
+
+  // Password Validation Function
+  function validatePassword(password) {
+    const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}$/;
+    return passwordRegex.test(password);
+  }
+</script>
+
+</body>
+</html>
